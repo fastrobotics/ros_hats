@@ -10,7 +10,7 @@ TEST(BasicTest, FailureScenarios) {
     Logger* logger = new Logger("DEBUG", "UnitTestMockServoHatDriver");
     IServoHatDriver* SUT = new (MockServoHatDriver);
     SUT->init(logger);
-    EXPECT_GT(SUT->get_channels().size(), 0);
+    EXPECT_GT(SUT->get_channel_definitions().size(), 0);
     logger->log_debug(SUT->pretty());
 
     // Invalid Pin
@@ -24,7 +24,8 @@ TEST(BasicTest, TestOperation) {
     Logger* logger = new Logger("DEBUG", "UnitTestMockServoHatDriver");
     IServoHatDriver* SUT = new (MockServoHatDriver);
     SUT->init(logger);
-    EXPECT_GT(SUT->get_channels().size(), 0);
+    EXPECT_GT(SUT->get_channel_definitions().size(), 0);
+    EXPECT_GT(SUT->get_channel_map().size(), 0);
     logger->log_debug(SUT->pretty());
 
     double timeToRun = 10.0;

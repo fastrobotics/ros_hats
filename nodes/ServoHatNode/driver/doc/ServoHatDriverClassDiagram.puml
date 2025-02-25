@@ -4,31 +4,38 @@ package eros {
     class Logger
 }
 namespace ros_hats{
-struct Channel #Orange {
+struct ChannelDefinition #LimeGreen {
     +uint8 pin_number
     +string name
+}
+struct Channel #LimeGreen {
+    +ChannelDefinition definition
     +uint16 value
 }
-interface IServoHatDriver #Orange {
+Channel -> ChannelDefinition
+interface IServoHatDriver #LimeGreen {
     +{abstract} bool init(Logger logger, address)
     +{abstract} bool update(double dt)
     +{abstract} bool setServoValue(int pin_number, int value)
     +{abstract} bool finish()
     +{abstract} string pretty(string mode)
-    +{abstract} map<uint8, Channel> get_channels()
+    +{abstract} map<string, ChannelDefinition> get_channel_definitions()
+    +{abstract} map<uint8, Channel> get_channel_map()
 
 }
 IServoHatDriver +-- Channel
-abstract BaseServoHatDriver #Orange {
-    +map<uint8, Channel> get_channels()
+abstract BaseServoHatDriver #LimeGreen {
+    +map<string, Channel> get_channel_definitions()
+    +map<uint8, Channel> get_channel_map()
     +bool update(double dt)
     +bool setServoValue(int pin_number, int v) 
     +string pretty()
     #Logger logger
-    #map<uint8, Channel> channel_map
+    #map<string, ChannelDefinition> channel_definition_map
+    #map<uint8,Channel> channel_map
 }
 IServoHatDriver <|.. BaseServoHatDriver
-class ServoHatDriver #Orange {
+class ServoHatDriver #LimeGreen {
     +bool init(Logger logger, address)
     +bool setServoValue(int pin_number, int value)
     +bool finish()
@@ -38,7 +45,7 @@ note right of ServoHatDriver
 ARMV7L
 end note
 BaseServoHatDriver <|-- ServoHatDriver
-class MockServoHatDriver #Orange {
+class MockServoHatDriver #LimeGreen {
     +bool init(Logger logger, address)
     +bool setServoValue(int pin_number, int value)
     +bool finish()

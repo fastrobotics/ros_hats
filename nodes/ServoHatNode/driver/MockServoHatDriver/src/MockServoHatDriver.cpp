@@ -9,11 +9,13 @@ bool MockServoHatDriver::finish() {
     logger->log_warn("Finish");
     return true;
 }
-bool MockServoHatDriver::init(eros::Logger* _logger, int address) {
+bool MockServoHatDriver::init(eros::Logger* _logger, int /* address*/) {
     logger = _logger;
     logger->log_warn("This is a Mock of the Servo Hat!");
-    channel_map.insert(std::pair<uint8_t, Channel>(
-        0, Channel(0, "Mock Pin", IServoHatDriver::MEDIUM_SERVO_VALUE)));
+    ChannelDefinition mock_channel("MockPin", 0);
+    channel_map.insert(std::pair<uint8_t, Channel>(mock_channel.pin_number, mock_channel));
+    channel_definition_map.insert(
+        std::pair<std::string, ChannelDefinition>(mock_channel.name, mock_channel));
     return true;
 }
 std::string MockServoHatDriver::pretty(std::string mode) {

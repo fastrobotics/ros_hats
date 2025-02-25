@@ -10,9 +10,7 @@
 #pragma once
 #include <eros/BaseNodeProcess.h>
 #include <eros_diagnostic/Diagnostic.h>
-#include <nav_msgs/Odometry.h>
-#include <sensor_msgs/NavSatFix.h>
-#include <sensor_msgs/NavSatStatus.h>
+#include <std_msgs/UInt16.h>
 
 #include "IServoHatDriver.h"
 #ifdef ARCHITECTURE_ARMV7L
@@ -38,8 +36,13 @@ class ServoHatNodeProcess : public eros::BaseNodeProcess
         return;
     }
     std::string pretty() override;
+    std::map<std::string, IServoHatDriver::ChannelDefinition> get_channel_definitions() {
+        return driver->get_channel_definitions();
+    }
+    bool new_servo_command(std::string channel_name, std_msgs::UInt16 msg);
 
    private:
     IServoHatDriver* driver;
+    std::map<std::string, IServoHatDriver::ChannelDefinition> channel_definition_map;
 };
 }  // namespace ros_hats
