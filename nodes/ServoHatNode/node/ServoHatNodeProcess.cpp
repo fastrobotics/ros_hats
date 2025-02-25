@@ -31,7 +31,18 @@ bool ServoHatNodeProcess::new_servo_command(std::string channel_name, std_msgs::
 }
 eros::eros_diagnostic::Diagnostic ServoHatNodeProcess::update(double t_dt, double t_ros_time) {
     eros::eros_diagnostic::Diagnostic diag = base_update(t_dt, t_ros_time);
-    driver->update(t_dt);
+    if (driver->update(t_dt) == false) {
+        update_diagnostic(eros::eros_diagnostic::DiagnosticType::ACTUATORS,
+                          eros::Level::Type::WARN,
+                          eros::eros_diagnostic::Message::DROPPING_PACKETS,
+                          "Unable to Update Servo Hat Driver");
+    }
+    else {
+        update_diagnostic(eros::eros_diagnostic::DiagnosticType::ACTUATORS,
+                          eros::Level::Type::INFO,
+                          eros::eros_diagnostic::Message::NOERROR,
+                          "Servo Hat Driver Updated");
+    }
     return diag;
 }
 std::vector<eros::eros_diagnostic::Diagnostic> ServoHatNodeProcess::new_commandmsg(
