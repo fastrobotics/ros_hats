@@ -36,13 +36,13 @@ class ServoHatNodeProcess : public eros::BaseNodeProcess
         return;
     }
     std::string pretty() override;
-    std::map<std::string, IServoHatDriver::ChannelDefinition> get_channels() {
-        return driver->get_channels();
+    std::map<std::string, IServoHatDriver::ChannelDefinition> get_channel_definitions() {
+        return driver->get_channel_definitions();
     }
     bool new_servo_command(std::string channel_name, std_msgs::UInt16 msg);
 
    private:
     IServoHatDriver* driver;
-    std::map<std::string, IServoHatDriver::ChannelDefinition> channel_map;
+    std::map<std::string, IServoHatDriver::ChannelDefinition> channel_definition_map;
 };
 }  // namespace ros_hats

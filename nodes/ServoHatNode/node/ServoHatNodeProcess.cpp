@@ -14,15 +14,15 @@ eros::eros_diagnostic::Diagnostic ServoHatNodeProcess::finish_initialization() {
     driver = new MockServoHatDriver;
 #endif
     driver->init(logger);
-    channel_map = driver->get_channels();
+    channel_definition_map = driver->get_channel_definitions();
     return diag;
 }
 
 void ServoHatNodeProcess::reset() {
 }
 bool ServoHatNodeProcess::new_servo_command(std::string channel_name, std_msgs::UInt16 msg) {
-    auto channel_it = channel_map.find(channel_name);
-    if (channel_it == channel_map.end()) {
+    auto channel_it = channel_definition_map.find(channel_name);
+    if (channel_it == channel_definition_map.end()) {
         logger->log_warn("Got Servo Command for Channel " + channel_name +
                          " but Channel not defined!");
         return false;

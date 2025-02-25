@@ -21,7 +21,10 @@ class BaseServoHatDriver : public IServoHatDriver
     }
     virtual ~BaseServoHatDriver() {
     }
-    std::map<std::string, ChannelDefinition> get_channels() override {
+    std::map<std::string, ChannelDefinition> get_channel_definitions() override {
+        return channel_definition_map;
+    }
+    std::map<uint8_t, Channel> get_channel_map() {
         return channel_map;
     }
     bool update(double dt) override {
@@ -29,6 +32,11 @@ class BaseServoHatDriver : public IServoHatDriver
         return true;
     }
     bool setServoValue(int pin_number, int v) {
+        auto channel_it = channel_map.find(pin_number);
+        if (channel_it == channel_map.end()) {
+            logger->log_warn("Pin " + std::to_string(pin_number) + " Not Defined!");
+            return false;
+        }
         if ((v < MIN_SERVO_VALUE) || (v > MAX_SERVO_VALUE)) {
             return false;
         }
@@ -44,8 +52,9 @@ class BaseServoHatDriver : public IServoHatDriver
             else {
                 str += "--- Channels ---\n";
                 for (auto channel : channel_map) {
-                    str += "\t[" + std::to_string(channel.second.pin_number) +
-                           "] Name: " + channel.second.name + "\n";
+                    str += "\t[" + std::to_string(channel.second.definition.pin_number) +
+                           "] Name: " + channel.second.definition.name +
+                           " V: " + std::to_string(channel.second.value) + "\n";
                 }
             }
         }
@@ -56,7 +65,8 @@ class BaseServoHatDriver : public IServoHatDriver
             }
             else {
                 for (auto channel : channel_map) {
-                    str += "P: " + std::to_string(channel.second.pin_number) + " ";
+                    str += "P: " + std::to_string(channel.second.definition.pin_number) +
+                           " V: " + std::to_string(channel.second.value) + "\n";
                 }
             }
         }
@@ -65,7 +75,8 @@ class BaseServoHatDriver : public IServoHatDriver
 
    protected:
     eros::Logger* logger;
-    std::map<std::string, ChannelDefinition> channel_map;
+    std::map<std::string, ChannelDefinition> channel_definition_map;
+    std::map<uint8_t, Channel> channel_map;
 
    private:
     double run_time{0.0};

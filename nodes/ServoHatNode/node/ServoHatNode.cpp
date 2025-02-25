@@ -79,7 +79,7 @@ bool ServoHatNode::start() {
     diagnostic_types.push_back(eros::eros_diagnostic::DiagnosticType::ACTUATORS);
     process->enable_diagnostics(diagnostic_types);
     process->finish_initialization();
-    auto channels = process->get_channels();
+    auto channels = process->get_channel_definitions();
     for (auto channel : channels) {
         ros::Subscriber sub = n->subscribe<std_msgs::UInt16>(
             channel.second.name,
@@ -148,7 +148,6 @@ eros::eros_diagnostic::Diagnostic ServoHatNode::finish_initialization() {
 }
 void ServoHatNode::channel_Callback(const std_msgs::UInt16::ConstPtr &t_msg,
                                     const std::string &channel_name) {
-    logger->log_warn("Channel: " + channel_name + " V: " + std::to_string(t_msg->data));
     std_msgs::UInt16 msg;
     msg.data = t_msg->data;
     process->new_servo_command(channel_name, msg);

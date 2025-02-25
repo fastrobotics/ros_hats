@@ -67,7 +67,7 @@ int main(int argc, char* argv[]) {
     else if (mode == "direct") {
     }
     else if (mode == "ramp") {
-        value = IServoHatDriver::MIN_SERVO_VALUE;
+        value = IServoHatDriver::MEDIUM_SERVO_VALUE;
     }
     else {
         logger->log_error("Mode: " + mode + " Not Supported!");
@@ -90,10 +90,10 @@ int main(int argc, char* argv[]) {
                 direction = true;
             }
             if (direction == true) {
-                value += 5;
+                value += 1;
             }
             else {
-                value -= 5;
+                value -= 1;
             }
         }
         else if (mode == "direct") {  // Default, nothing to do here
