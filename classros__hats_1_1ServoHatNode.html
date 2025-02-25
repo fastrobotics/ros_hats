@@ -152,6 +152,9 @@ void&#160;</td><td class="memItemRight" valign="bottom"><b>system_commandAction_
 <tr class="memitem:a57d3661c677466944eeaa65ef29a59a0"><td class="memItemLeft" align="right" valign="top"><a id="a57d3661c677466944eeaa65ef29a59a0"></a>
 void&#160;</td><td class="memItemRight" valign="bottom"><b>command_Callback</b> (const eros::command::ConstPtr &amp;t_msg)</td></tr>
 <tr class="separator:a57d3661c677466944eeaa65ef29a59a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1bc6c6293e7406cc186dfbb5a87c2b50"><td class="memItemLeft" align="right" valign="top"><a id="a1bc6c6293e7406cc186dfbb5a87c2b50"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><b>channel_Callback</b> (const std_msgs::UInt16::ConstPtr &amp;t_msg, const std::string &amp;channel_name)</td></tr>
+<tr class="separator:a1bc6c6293e7406cc186dfbb5a87c2b50"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a6859b8e005ec3bbcdf60a2037ab8b8e8"><td class="memItemLeft" align="right" valign="top"><a id="a6859b8e005ec3bbcdf60a2037ab8b8e8"></a>
 std::string&#160;</td><td class="memItemRight" valign="bottom"><b>pretty</b> () override</td></tr>
 <tr class="separator:a6859b8e005ec3bbcdf60a2037ab8b8e8"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -167,7 +170,7 @@ const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memdesc:a7d9c62845e9a45a7116fb9640cf4d34b"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Major Release Version of the Node. <br /></td></tr>
 <tr class="separator:a7d9c62845e9a45a7116fb9640cf4d34b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa60e753e97399761ae76e9eb53c4a2a0"><td class="memItemLeft" align="right" valign="top"><a id="aa60e753e97399761ae76e9eb53c4a2a0"></a>
-const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classros__hats_1_1ServoHatNode.html#aa60e753e97399761ae76e9eb53c4a2a0">MINOR_RELEASE_VERSION</a> = 0</td></tr>
+const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classros__hats_1_1ServoHatNode.html#aa60e753e97399761ae76e9eb53c4a2a0">MINOR_RELEASE_VERSION</a> = 1</td></tr>
 <tr class="memdesc:aa60e753e97399761ae76e9eb53c4a2a0"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Minor Release Version of the Node. <br /></td></tr>
 <tr class="separator:aa60e753e97399761ae76e9eb53c4a2a0"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a1cad0fb3da0de158b01375d0b1f4384d"><td class="memItemLeft" align="right" valign="top"><a id="a1cad0fb3da0de158b01375d0b1f4384d"></a>
@@ -175,7 +178,7 @@ const uint16_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" 
 <tr class="memdesc:a1cad0fb3da0de158b01375d0b1f4384d"><td class="mdescLeft">&#160;</td><td class="mdescRight">The Build Number of the Node. <br /></td></tr>
 <tr class="separator:a1cad0fb3da0de158b01375d0b1f4384d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9af18408cf8b01b7738eff382c9ce6b6"><td class="memItemLeft" align="right" valign="top"><a id="a9af18408cf8b01b7738eff382c9ce6b6"></a>
-const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classros__hats_1_1ServoHatNode.html#a9af18408cf8b01b7738eff382c9ce6b6">FIRMWARE_DESCRIPTION</a> = &quot;Latest Rev: 22-Feb-2025&quot;</td></tr>
+const std::string&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classros__hats_1_1ServoHatNode.html#a9af18408cf8b01b7738eff382c9ce6b6">FIRMWARE_DESCRIPTION</a> = &quot;Latest Rev: 23-Feb-2025&quot;</td></tr>
 <tr class="memdesc:a9af18408cf8b01b7738eff382c9ce6b6"><td class="mdescLeft">&#160;</td><td class="mdescRight">A Description of the Firmware. <br /></td></tr>
 <tr class="separator:a9af18408cf8b01b7738eff382c9ce6b6"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a84612fca04e1bcee5cb384b281490026"><td class="memItemLeft" align="right" valign="top"><a id="a84612fca04e1bcee5cb384b281490026"></a>
@@ -205,6 +208,9 @@ Private Attributes</h2></td></tr>
 <tr class="memitem:a79e0e6e0933c5aac709e2f9a272eef92"><td class="memItemLeft" align="right" valign="top"><a id="a79e0e6e0933c5aac709e2f9a272eef92"></a>
 actionlib::SimpleActionServer&lt; eros::system_commandAction &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>system_command_action_server</b></td></tr>
 <tr class="separator:a79e0e6e0933c5aac709e2f9a272eef92"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a447cef550030c155de7a1e29f69ffe02"><td class="memItemLeft" align="right" valign="top"><a id="a447cef550030c155de7a1e29f69ffe02"></a>
+std::vector&lt; ros::Subscriber &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>channel_subs</b></td></tr>
+<tr class="separator:a447cef550030c155de7a1e29f69ffe02"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p><a class="el" href="classros__hats_1_1ServoHatNode.html" title="ServoHatNode.">ServoHatNode</a>. </p>

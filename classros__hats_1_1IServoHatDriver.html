@@ -90,6 +90,8 @@ Inheritance diagram for ros_hats::IServoHatDriver:</div>
 Classes</h2></td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structros__hats_1_1IServoHatDriver_1_1Channel.html">Channel</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structros__hats_1_1IServoHatDriver_1_1ChannelDefinition.html">ChannelDefinition</a></td></tr>
+<tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:"><td class="memItemLeft" align="right" valign="top">struct &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="structros__hats_1_1IServoHatDriver_1_1ServoHatDriverContainer.html">ServoHatDriverContainer</a></td></tr>
 <tr class="separator:"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
@@ -110,9 +112,12 @@ virtual bool&#160;</td><td class="memItemRight" valign="bottom"><b>setServoValue
 <tr class="memitem:aef8681812b428fc1dd53df487eb3f8b3"><td class="memItemLeft" align="right" valign="top"><a id="aef8681812b428fc1dd53df487eb3f8b3"></a>
 virtual std::string&#160;</td><td class="memItemRight" valign="bottom"><b>pretty</b> (std::string mode=&quot;&quot;)=0</td></tr>
 <tr class="separator:aef8681812b428fc1dd53df487eb3f8b3"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a5b32372b5589784e5a8c78e694394938"><td class="memItemLeft" align="right" valign="top"><a id="a5b32372b5589784e5a8c78e694394938"></a>
-virtual std::map&lt; uint8_t, <a class="el" href="structros__hats_1_1IServoHatDriver_1_1Channel.html">Channel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_channels</b> ()=0</td></tr>
-<tr class="separator:a5b32372b5589784e5a8c78e694394938"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a064787418019b19d3223656bd8a2b01f"><td class="memItemLeft" align="right" valign="top"><a id="a064787418019b19d3223656bd8a2b01f"></a>
+virtual std::map&lt; std::string, <a class="el" href="structros__hats_1_1IServoHatDriver_1_1ChannelDefinition.html">ChannelDefinition</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_channel_definitions</b> ()=0</td></tr>
+<tr class="separator:a064787418019b19d3223656bd8a2b01f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a2b416be68f4d2a4447976f25d831d8d2"><td class="memItemLeft" align="right" valign="top"><a id="a2b416be68f4d2a4447976f25d831d8d2"></a>
+virtual std::map&lt; uint8_t, <a class="el" href="structros__hats_1_1IServoHatDriver_1_1Channel.html">Channel</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><b>get_channel_map</b> ()=0</td></tr>
+<tr class="separator:a2b416be68f4d2a4447976f25d831d8d2"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a name="pub-static-attribs"></a>
 Static Public Attributes</h2></td></tr>
@@ -120,10 +125,10 @@ Static Public Attributes</h2></td></tr>
 static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>MIN_SERVO_VALUE</b> = 500</td></tr>
 <tr class="separator:a9705b15d4c1dc43013404cd7226d5620"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a13e924b44d5d2051bf431e6774ee850f"><td class="memItemLeft" align="right" valign="top"><a id="a13e924b44d5d2051bf431e6774ee850f"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>MEDIUM_SERVO_VALUE</b> = 1000</td></tr>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>MEDIUM_SERVO_VALUE</b> = 1500</td></tr>
 <tr class="separator:a13e924b44d5d2051bf431e6774ee850f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a923e5abe1f78d155c2b9d630065ae329"><td class="memItemLeft" align="right" valign="top"><a id="a923e5abe1f78d155c2b9d630065ae329"></a>
-static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_SERVO_VALUE</b> = 1500</td></tr>
+static constexpr int&#160;</td><td class="memItemRight" valign="bottom"><b>MAX_SERVO_VALUE</b> = 2000</td></tr>
 <tr class="separator:a923e5abe1f78d155c2b9d630065ae329"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <hr/>The documentation for this class was generated from the following file:<ul>
