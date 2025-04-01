@@ -36,7 +36,6 @@ TEST(BasicTest, TestOperation) {
                 Logger::LoggerStatus::LOG_WRITTEN);
 
     eros_diagnostic::Diagnostic diag = tester->finish_initialization();
-    logger->log_diagnostic(diag);
     EXPECT_TRUE(diag.level <= Level::Type::NOTICE);
 
     tester->reset();
@@ -50,12 +49,6 @@ TEST(BasicTest, TestOperation) {
         timer += dt;
     }
 
-    logger->log_warn("Testing Unsupported Command Message");
-    {
-        eros::command cmd;
-        std::vector<eros::eros_diagnostic::Diagnostic> diag_list = tester->new_commandmsg(cmd);
-        EXPECT_EQ(diag_list.size(), 0);
-    }
     logger->log_warn("Testing Unsupported Program Variables Check");
     {
         std::vector<eros::eros_diagnostic::Diagnostic> diag_list = tester->check_programvariables();
@@ -64,6 +57,36 @@ TEST(BasicTest, TestOperation) {
     tester->cleanup();
 
     // delete logger;
+    delete tester;
+}
+TEST(TestCommands, TestAllCommands) {
+    Logger* logger = new Logger("DEBUG", "UnitTestGPSHatNodeProcess");
+    GPSHatNodeProcessTester* tester = new GPSHatNodeProcessTester;
+    tester->initialize("UnitTestGPSHatNodeProcess",
+                       "UnitTestGPSHatNodeProcess",
+                       "MyHost",
+                       System::MainSystem::SIMROVER,
+                       System::SubSystem::ENTIRE_SYSTEM,
+                       System::Component::ENTIRE_SUBSYSTEM,
+                       logger);
+    std::vector<eros_diagnostic::DiagnosticType> diagnostic_types;
+    diagnostic_types.push_back(eros_diagnostic::DiagnosticType::SOFTWARE);
+    diagnostic_types.push_back(eros_diagnostic::DiagnosticType::DATA_STORAGE);
+    diagnostic_types.push_back(eros_diagnostic::DiagnosticType::SYSTEM_RESOURCE);
+    diagnostic_types.push_back(eros_diagnostic::DiagnosticType::COMMUNICATIONS);
+    tester->enable_diagnostics(diagnostic_types);
+
+    eros_diagnostic::Diagnostic diag = tester->finish_initialization();
+    EXPECT_TRUE(diag.level <= Level::Type::NOTICE);
+    for (uint8_t i = (uint16_t)Command::Type::UNKNOWN; i < (uint16_t)Command::Type::END_OF_LIST;
+         ++i) {
+        eros::command new_cmd;
+        new_cmd.Command = i;
+        std::vector<eros_diagnostic::Diagnostic> diag_list = tester->new_commandmsg(new_cmd);
+        EXPECT_GT(diag_list.size(), 0);
+        for (auto diag : diag_list) { EXPECT_TRUE(diag.level < Level::Type::WARN); }
+    }
+
     delete tester;
 }
 int main(int argc, char** argv) {

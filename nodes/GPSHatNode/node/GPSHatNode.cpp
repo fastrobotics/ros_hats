@@ -26,14 +26,8 @@ void GPSHatNode::system_commandAction_Callback(const eros::system_commandGoalCon
 }
 void GPSHatNode::command_Callback(const eros::command::ConstPtr &t_msg) {
     eros::command cmd = eros::eros_utility::ConvertUtility::convert_fromptr(t_msg);
-    eros::eros_diagnostic::Diagnostic diag = process->get_root_diagnostic();
-    diag = process->update_diagnostic(
-        eros::eros_diagnostic::DiagnosticType::COMMUNICATIONS,
-        eros::Level::Type::WARN,
-        eros::eros_diagnostic::Message::DROPPING_PACKETS,
-        "Received unsupported Command: " +
-            eros::Command::CommandString((eros::Command::Type)cmd.Command));
-    logger->log_diagnostic(diag);
+    auto diag_list = process->new_commandmsg(cmd);
+    for (auto diag : diag_list) { logger->log_diagnostic(diag); }
 }
 bool GPSHatNode::changenodestate_service(eros::srv_change_nodestate::Request &req,
                                          eros::srv_change_nodestate::Response &res) {
