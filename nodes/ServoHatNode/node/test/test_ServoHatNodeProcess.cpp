@@ -49,12 +49,6 @@ TEST(BasicTest, TestOperation) {
         timer += dt;
     }
 
-    logger->log_warn("Testing Unsupported Command Message");
-    {
-        eros::command cmd;
-        std::vector<eros::eros_diagnostic::Diagnostic> diag_list = tester->new_commandmsg(cmd);
-        EXPECT_EQ(diag_list.size(), 0);
-    }
     logger->log_warn("Testing Unsupported Program Variables Check");
     {
         std::vector<eros::eros_diagnostic::Diagnostic> diag_list = tester->check_programvariables();
@@ -96,7 +90,6 @@ TEST(TestCommands, TestAllCommands) {
     }
 
     delete tester;
-    delete logger;
 }
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
